@@ -1,0 +1,29 @@
+{
+  "name": "labecommerce-backend",
+  "version": "1.0.0",
+  "description": "Projeto back-end pilares com labecommerce",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node ./build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vr-Farias/labecommerce-backend.git"
+  },
+  "keywords": [
+    "labecommerce",
+    "labenu",
+    "back-end",
+    "VanessaFarias"
+  ],
+  "author": "Vanessa Farias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vr-Farias/labecommerce-backend/issues"
+  },
+  "homepage": "https://github.com/Vr-Farias/labecommerce-backend#readme",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
