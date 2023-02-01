@@ -79,4 +79,40 @@ purchases.paid,
 purchases.delivered_at
 FROM purchases
 JOIN users ON purchases.buyer_id = users.id
-WHERE users.id = "2"
+WHERE users.id = "2";
+
+-- ===================================== 
+
+CREATE TABLE purchases_products (
+    purchase_id TEXT NOT NULL,
+    product_id TEXT NOT NULL, 
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY (purchase_id) REFERENCES purchases(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+    );
+
+DROP TABLE purchases_products;
+
+SELECT * FROM purchases_products;
+
+INSERT INTO purchases_products (purchase_id, product_id, quantity)
+VALUES ("pc001","1", 2),
+        ("pc002","3", 7),
+        ("pc003", "2", 3);
+
+SELECT
+purchases.id,
+purchases.total_price,
+purchases.paid,
+purchases.delivered_at,
+purchases.buyer_id,
+purchases_products.product_id AS productId,
+purchases_products.quantity,
+products.name,
+products.price,
+products.category
+FROM purchases
+LEFT JOIN purchases_products 
+ON purchases_products.purchase_id = purchases.id
+INNER JOIN products 
+ON purchases_products.product_id = products.id;
