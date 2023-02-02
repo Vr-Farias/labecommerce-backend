@@ -136,7 +136,7 @@ app.get('/products', async (req:Request, res:Response)=>{
 //                 category !== "Eletrônicos"
 //             ){
 //                 res.status(400);
-//                 throw new Error ("Escolha uma das categorias existentes.");
+//                 throw new Error ("Escolha uma das categorias.");
 //             }
 //         }
 // //atualização
@@ -228,8 +228,8 @@ app.get("/products/:id", async (req: Request, res: Response) => {
       `);
   
       if (!product) {
-        res.status(400); // definimos um status code apropriado antes do disparo
-        throw new Error("O produto não existe!");
+        res.status(400);
+        throw new Error("Produto inexistente.");
       }
   
       res.status(200).send({ product: product });
@@ -253,7 +253,7 @@ app.post('/users', async (req:Request,res:Response)=>{
             
         if (typeof id !== "string"){
          res.status(400);
-                throw new Error ("Id precisa ser uma string.");
+                throw new Error ("ID precisa ser uma string.");
             }
  for (let i = 0; i < users.length; i++){
                 if (users[i].id === id){
@@ -351,42 +351,42 @@ app.post('/products', async (req:Request, res:Response)=>{
         if (name !== undefined) {
             if (typeof name !== "string") {
               res.status(400);
-              throw new Error("Name deve ser uma string");
+              throw new Error("Nome deve ser uma string");
             }
           }
       
           if (id.length < 1 || name.length < 1) {
             res.status(400);
             throw new Error(
-              "'Id' ou 'Name' de produto deve ter no minímo 1 caractere."
+              "ID/Nome de produto deve ter no minímo 1 caractere."
             );
           }
       
           if (price !== undefined) {
             if (typeof price !== "number") {
               res.status(400);
-              throw new Error("'Price' do produto deve ser um número");
+              throw new Error("Valor do produto deve ser um número.");
             }
           }
       
           if (description !== undefined) {
             if (typeof description !== "string") {
               res.status(400);
-              throw new Error("'Description' inválida, deve ser uma string");
+              throw new Error("Descrição deve ser uma string.");
             }
           }
       
           if (category !== undefined) {
             if (typeof category !== "string") {
               res.status(400);
-              throw new Error("'Category' invalida, deve ser uma string");
+              throw new Error("Categoria deve ser uma string.");
             }
           }
       
           if (image_url !== undefined) {
             if (typeof image_url !== "string") {
               res.status(400);
-              throw new Error("'Image_url' inválida, deve ser uma string");
+              throw new Error("Imagem inválida, insira um link.");
             }
           }
       
@@ -437,13 +437,13 @@ app.post('/purchase', async (req:Request, res:Response)=>{
         );
         if (findPurchaseId) {
           res.status(400);
-          throw new Error("Id de compra já cadastrado. Tenta novo Id de compra.");
+          throw new Error("ID de compra já existente.");
         }
     
         if (buyer !== undefined) {
           if (typeof buyer !== "string") {
             res.status(400);
-            throw new Error("Buyer deve ser uma string");
+            throw new Error("Comprador deve ser uma string.");
           }
         }
     
@@ -452,26 +452,24 @@ app.post('/purchase', async (req:Request, res:Response)=>{
         );
         if (!findUserId) {
           res.status(400);
-          throw new Error("Não foi possivel achar o usuario pelo ID");
+          throw new Error("ID de usuário inexistente.");
         }
     
         if (id.length < 1 || buyer.length < 1) {
           res.status(400);
-          throw new Error(
-            "As informações da compra devem ter no minímo 1 caractere."
-          );
+          throw new Error("Informações incompletas.");
         }
     
         if (total_price !== undefined) {
           if (typeof total_price !== "number") {
             res.status(400);
-            throw new Error("Preço total da compra deve ser um número");
+            throw new Error("Valor total deve ser um número.");
           }
         }
         if (paid !== undefined) {
           if (typeof paid !== "number") {
             res.status(400);
-            throw new Error("Status de pago deve ser um número");
+            throw new Error("Informe 0 ou 1 para informar status.");
           }
         }
     
